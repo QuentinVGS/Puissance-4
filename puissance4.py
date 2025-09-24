@@ -8,3 +8,10 @@ def print_grid(grid):
     for row in grid:
         print("| " + " | ".join(row) + " |")
     print("  " + "   ".join(str(i) for i in range(COLS)))
+
+def drop_piece(grid, col, piece):
+    for row in reversed(grid):
+        if row[col] == " ":
+            row[col] = piece
+            return True
+    return False
