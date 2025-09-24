@@ -38,3 +38,23 @@ def check_win(grid, piece):
             if all(grid[r-i][c+i] == piece for i in range(4)):
                 return True
     return False
+
+def play_game():
+    grid = create_grid()
+    game_over = False
+    turn = 0
+
+    while not game_over:
+        print_grid(grid)
+        col = int(input(f"Player {turn+1} ({'X' if turn==0 else 'O'}) - Choose column (0-{COLS-1}): "))
+
+        if 0 <= col < COLS and drop_piece(grid, col, "X" if turn==0 else "O"):
+            if check_win(grid, "X" if turn==0 else "O"):
+                print_grid(grid)
+                print(f"Player {turn+1} wins!")
+                game_over = True
+            turn = 1 - turn
+        else:
+            print("Invalid move, try again!")
+
+play_game()
