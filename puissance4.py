@@ -15,3 +15,26 @@ def drop_piece(grid, col, piece):
             row[col] = piece
             return True
     return False
+
+def check_win(grid, piece):
+    # Horizontal
+    for r in range(ROWS):
+        for c in range(COLS-3):
+            if all(grid[r][c+i] == piece for i in range(4)):
+                return True
+    # Vertical
+    for r in range(ROWS-3):
+        for c in range(COLS):
+            if all(grid[r+i][c] == piece for i in range(4)):
+                return True
+    # Diagonal \
+    for r in range(ROWS-3):
+        for c in range(COLS-3):
+            if all(grid[r+i][c+i] == piece for i in range(4)):
+                return True
+    # Diagonal /
+    for r in range(3, ROWS):
+        for c in range(COLS-3):
+            if all(grid[r-i][c+i] == piece for i in range(4)):
+                return True
+    return False
